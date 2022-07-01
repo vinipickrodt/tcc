@@ -1,0 +1,5 @@
+﻿CREATE TABLE [dbo].[Modelo]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
+    [Nome] VARCHAR(50) NULL
+)
