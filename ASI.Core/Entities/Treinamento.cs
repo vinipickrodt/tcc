@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ASI.API.Models
+namespace ASI.Core.Entities
 {
     public class Treinamento
     {

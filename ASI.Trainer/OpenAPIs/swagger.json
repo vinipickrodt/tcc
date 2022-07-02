@@ -1,0 +1,445 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "ASI.API",
+    "version": "1.0"
+  },
+  "paths": {
+    "/Sasi/ValidarDados": {
+      "post": {
+        "tags": [
+          "Sasi"
+        ],
+        "parameters": [
+          {
+            "name": "modeloId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "dados",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidarDadosResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Sasi/ObterSugestoesDados": {
+      "post": {
+        "tags": [
+          "Sasi"
+        ],
+        "parameters": [
+          {
+            "name": "modeloId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "string"
+                }
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "string"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "string"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Sasi/CriarModelo": {
+      "post": {
+        "tags": [
+          "Sasi"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Modelo"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Modelo"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Modelo"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Modelo"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Sasi/InserirDadosTreinamentoEmLote": {
+      "post": {
+        "tags": [
+          "Sasi"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DadosTreinamentoEmLote"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DadosTreinamentoEmLote"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DadosTreinamentoEmLote"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DadosTreinamentoEmLote"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Sasi/ObterProximoModeloParaTreinar": {
+      "post": {
+        "tags": [
+          "Sasi"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Modelo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Sasi/ObterDadosTreinamento": {
+      "post": {
+        "tags": [
+          "Sasi"
+        ],
+        "parameters": [
+          {
+            "name": "parametrosModeloId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Sasi/AtualizarModeloTreinamento": {
+      "post": {
+        "tags": [
+          "Sasi"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TreinoModeloArquivo"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TreinoModeloArquivo"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TreinoModeloArquivo"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TreinoModeloArquivo"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "DadosTreinamentoEmLote": {
+        "type": "object",
+        "properties": {
+          "modeloId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dados": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Modelo": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string",
+            "nullable": true
+          },
+          "dataUltimoTreinamento": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "tipo": {
+            "$ref": "#/components/schemas/eModeloTipo"
+          },
+          "acuracia": {
+            "type": "number",
+            "format": "double"
+          },
+          "habilitado": {
+            "type": "boolean"
+          },
+          "statusTreinamento": {
+            "$ref": "#/components/schemas/eModeloStatusTreinamento"
+          },
+          "camposEntrada": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ModeloCampo"
+            },
+            "nullable": true
+          },
+          "camposSaida": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ModeloCampo"
+            },
+            "nullable": true
+          },
+          "treinamentoFrequencia": {
+            "type": "string",
+            "nullable": true
+          },
+          "parametrosModeloId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ModeloCampo": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipo": {
+            "$ref": "#/components/schemas/eModeloCampoTipo"
+          }
+        },
+        "additionalProperties": false
+      },
+      "StringStringKeyValuePair": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TreinoModeloArquivo": {
+        "type": "object",
+        "properties": {
+          "modeloId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "modeloTreinadoBase64": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ValidarDadosResult": {
+        "type": "object",
+        "properties": {
+          "sugestoes": {
+            "$ref": "#/components/schemas/StringStringKeyValuePair"
+          }
+        },
+        "additionalProperties": false
+      },
+      "eModeloCampoTipo": {
+        "enum": [
+          "Texto",
+          "NumeroFlutuante",
+          "NumeroInteiro"
+        ],
+        "type": "string"
+      },
+      "eModeloStatusTreinamento": {
+        "enum": [
+          "Parado",
+          "Treinando"
+        ],
+        "type": "string"
+      },
+      "eModeloTipo": {
+        "enum": [
+          "ClassificadorBinario",
+          "ClassificadorMulticlasse",
+          "Regressao",
+          "Recomendacao",
+          "Ranking"
+        ],
+        "type": "string"
+      }
+    }
+  }
+}
