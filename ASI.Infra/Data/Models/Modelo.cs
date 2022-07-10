@@ -19,7 +19,7 @@ namespace ASI.Infra.Data.Models
         public string Nome { get; set; }
         public int TipoModelo { get; set; }
         public string FrequenciaTreinamentos { get; set; }
-        public DateTime? DataUltimoTreinamento { get; set; }
+        public DateTime DataUltimoTreinamento { get; set; }
         public int Status { get; set; }
         public int StatusTreinamento { get; set; }
 

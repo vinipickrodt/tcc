@@ -8,13 +8,13 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace ASI.Infra.Data.Models
 {
-    public partial class SasiContext : DbContext
+    public partial class sasiContext : DbContext
     {
-        public SasiContext()
+        public sasiContext()
         {
         }
 
-        public SasiContext(DbContextOptions<SasiContext> options)
+        public sasiContext(DbContextOptions<sasiContext> options)
             : base(options)
         {
         }
@@ -45,7 +45,6 @@ namespace ASI.Infra.Data.Models
                 entity.HasOne(d => d.ParametrosModelo)
                     .WithMany(p => p.DadosTreinamento)
                     .HasForeignKey(d => d.ParametrosModeloId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_DadosTreinamento_ParametrosModelo");
             });
 
@@ -74,7 +73,6 @@ namespace ASI.Infra.Data.Models
                 entity.HasOne(d => d.ParametrosModelo)
                     .WithMany(p => p.ModeloTreinado)
                     .HasForeignKey(d => d.ParametrosModeloId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ModeloTreinado_ParametrosModelo");
             });
 

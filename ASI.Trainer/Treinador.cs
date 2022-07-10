@@ -188,5 +188,5 @@ namespace ASI.Trainer
         }
     }
 
-    
+
 }

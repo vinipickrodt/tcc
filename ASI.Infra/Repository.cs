@@ -21,10 +21,12 @@ namespace ASI.Infra
         {
             var m = new Data.Models.Modelo();
             m.Nome = modelo.Nome;
-            m.FrequenciaTreinamentos = modelo.TreinamentoFrequencia;
+            m.FrequenciaTreinamentos = modelo.TreinamentoFrequencia ?? "";
             m.TipoModelo = (int)modelo.Tipo;
             m.Status = 0;
             m.StatusTreinamento = 0;
+
+            m.DataUltimoTreinamento = (m.DataUltimoTreinamento == DateTime.MinValue ? new DateTime(1970, 1, 1) : m.DataUltimoTreinamento);
 
             var pm = new Data.Models.ParametrosModelo();
             pm.Modelo = m;
@@ -60,19 +62,30 @@ namespace ASI.Infra
 
         public Modelo ObtemProximoModeloParaTreinar()
         {
-            var hora = DateTime.Now.AddMinutes(30);
+            var hora = DateTime.Now.AddMinutes(-30);
 
-            var modelo = ctx.Modelo
-               .Where(m => m.DataUltimoTreinamento == null || m.DataUltimoTreinamento >= hora)
+            var modeloDb = ctx.Modelo
+               .Where(m => m.DataUltimoTreinamento == null || m.DataUltimoTreinamento <= hora)
                .OrderBy(m => m.DataUltimoTreinamento)
                .ThenBy(m => m.Id)
                .Include(m => m.ParametrosModelo)
                .FirstOrDefault();
 
-            if (modelo == null)
+            if (modeloDb == null)
+            {
                 return null;
+            }
 
-            return ConvertUtils.ConverterModeloDb(modelo);
+            var modelo = BuscaModelo(modeloDb.Id);
+
+            var existemDadosTreinamento = ctx.DadosTreinamento.Any(dt => dt.ParametrosModeloId == modelo.ParametrosModeloId);
+
+            if (!existemDadosTreinamento)
+            {
+                return null;
+            }
+
+            return ConvertUtils.ConverterModeloDb(modeloDb);
         }
 
         public Modelo BuscaModelo(int modeloId)

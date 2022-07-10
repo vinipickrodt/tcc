@@ -74,6 +74,8 @@ namespace ASI.API.Controllers
         public IActionResult ObterProximoModeloParaTreinar()
         {
             var modelo = repository.ObtemProximoModeloParaTreinar();
+            if (modelo == null)
+                return NotFound();
             return Ok(modelo);
         }
 

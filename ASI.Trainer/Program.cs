@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace ASI.Trainer
@@ -17,7 +18,7 @@ namespace ASI.Trainer
 
                     if (modelo != null)
                     {
-                        Console.WriteLine("TREINAMENTO INICIADO");
+                        Console.WriteLine($"TREINAMENTO INICIADO (Modelo = {modelo.Id.ToString().PadLeft(4)}, Data = {DateTime.Now.ToString("dd/MM/yy HH:mm")})");
 
                         var dadosTreinamento = await cliente.ObterDadosTreinamentoAsync(modelo.ParametrosModeloId);
                         var resultadoTreinamento = new Treinador(modelo).Treinar(dadosTreinamento);
@@ -28,19 +29,22 @@ namespace ASI.Trainer
                             ModeloTreinadoBase64 = Convert.ToBase64String(resultadoTreinamento)
                         });
 
-                        Console.WriteLine("TREINAMENTO FINALIZADO");
+                        Console.WriteLine($"TREINAMENTO FINALIZADO (Modelo = {modelo.Id.ToString().PadLeft(4)}, Data = {DateTime.Now.ToString("dd/MM/yy HH:mm")})");
                     }
                     else
                     {
                         Console.WriteLine("---");
                     }
                 }
-                catch (Exception ex)
+                catch (Clientes.ApiException apiEx)
                 {
-                    Console.WriteLine(ex.Message);
+                    if (apiEx.StatusCode != ((int)HttpStatusCode.NotFound))
+                    {
+                        Console.WriteLine(apiEx.Message);
+                    }
                 }
 
-                await Task.Delay(60000);
+                await Task.Delay(5000);
             }
         }
     }
